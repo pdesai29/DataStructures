@@ -16,7 +16,7 @@ class BST {
     let inserted = false;
     if (!this.root) {
       this.root = newNode;
-      return this;
+      return this.root.val;
     } else {
       let current = this.root;
       while (!inserted) {
@@ -71,6 +71,9 @@ class BST {
   BFS() {
     const data = [];
     const queue = [];
+    if (!this.root) {
+      return [];
+    }
     let current = this.root;
     queue.push(current);
     while (queue.length !== 0) {
@@ -84,9 +87,9 @@ class BST {
       data.push(queue[0].val);
       queue.shift();
     }
-    data.forEach((elem) => {
-      console.log(elem);
-    });
+    // data.forEach((elem) => {
+    //   // console.log(elem);
+    // });
     return data;
   }
   BFSColt() {
@@ -104,7 +107,7 @@ class BST {
   }
   printTree(node, prefix = "", isLeft = true) {
     if (node !== null) {
-      console.log(prefix + (isLeft ? "├── " : "└── ") + node.val);
+      console.log(prefix + (isLeft ? "├── " : "└──") + node.val);
       const indent = prefix + (isLeft ? "│   " : "    ");
       this.printTree(node.left, indent, true);
       this.printTree(node.right, indent, false);
@@ -148,6 +151,9 @@ class BST {
   }
 
   DFSInOrder() {
+    if (!this.root) {
+      return undefined;
+    }
     const visited = [];
     let current = this.root;
     const DFSInOrderHelper = (node) => {
@@ -160,6 +166,9 @@ class BST {
   }
 
   DFSPreOrder() {
+    if (!this.root) {
+      return undefined;
+    }
     const visited = [];
     let current = this.root;
     const DFSPreOrderHelper = (node) => {
@@ -171,6 +180,9 @@ class BST {
     return visited;
   }
   DFSPostOrder() {
+    if (!this.root) {
+      return undefined;
+    }
     const visited = [];
     let current = this.root;
     const DFSPostOrderHelper = (node) => {
@@ -247,19 +259,22 @@ class BST {
     }
   }
 }
-const tree = new BST();
-tree.insert(41);
-tree.insert(20);
-tree.insert(65);
-tree.insert(11);
-tree.insert(29);
-tree.insert(12);
-tree.insert(32);
-tree.insert(50);
-tree.insert(91);
-tree.insert(99);
-tree.insert(72);
-tree.insert(68);
+
+module.exports = BST;
+
+// const tree = new BST();
+// tree.insert(41);
+// tree.insert(20);
+// tree.insert(65);
+// tree.insert(11);
+// tree.insert(29);
+// tree.insert(12);
+// tree.insert(32);
+// tree.insert(50);
+// tree.insert(91);
+// tree.insert(99);
+// tree.insert(72);
+// tree.insert(68);
 
 // tree.printTree(tree.root);
 
