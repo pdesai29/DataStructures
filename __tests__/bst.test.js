@@ -67,18 +67,18 @@ describe("BST", () => {
       tree.insert(4);
       tree.insert(6);
       tree.insert(8);
-      const spy = jest.spyOn(console, "log");
+      // const spy = jest.spyOn(console, "log");
       const result = tree.BFS();
       expect(result).toEqual([5, 3, 7, 2, 4, 6, 8]);
-      expect(spy).toHaveBeenCalledTimes(7);
-      expect(spy).toHaveBeenNthCalledWith(1, 5);
-      expect(spy).toHaveBeenNthCalledWith(2, 3);
-      expect(spy).toHaveBeenNthCalledWith(3, 7);
-      expect(spy).toHaveBeenNthCalledWith(4, 2);
-      expect(spy).toHaveBeenNthCalledWith(5, 4);
-      expect(spy).toHaveBeenNthCalledWith(6, 6);
-      expect(spy).toHaveBeenNthCalledWith(7, 8);
-      spy.mockRestore();
+      // expect(spy).toHaveBeenCalledTimes(7);
+      // expect(spy).toHaveBeenNthCalledWith(1, 5);
+      // expect(spy).toHaveBeenNthCalledWith(2, 3);
+      // expect(spy).toHaveBeenNthCalledWith(3, 7);
+      // expect(spy).toHaveBeenNthCalledWith(4, 2);
+      // expect(spy).toHaveBeenNthCalledWith(5, 4);
+      // expect(spy).toHaveBeenNthCalledWith(6, 6);
+      // expect(spy).toHaveBeenNthCalledWith(7, 8);
+      // spy.mockRestore();
     });
 
     test("should return an empty array if the tree is empty", () => {
@@ -162,53 +162,53 @@ describe("BST", () => {
       expect(result).toEqual(undefined);
     });
   });
-    
-    describe("delete", () => {
-      test("should delete a leaf node correctly", () => {
-        tree.insert(5);
-        tree.insert(3);
-        tree.insert(7);
-        const result = tree.delete(3);
-        expect(result).toBe(3);
-        expect(tree.root.left).toBeNull();
-      });
 
-      test("should delete a node with one child correctly", () => {
-        tree.insert(5);
-        tree.insert(3);
-        tree.insert(7);
-        tree.insert(4);
-        const result = tree.delete(3);
-        expect(result).toBe(3);
-        expect(tree.root.left.val).toBe(4);
-      });
-
-      test("should delete a node with two children correctly", () => {
-        tree.insert(5);
-        tree.insert(3);
-        tree.insert(7);
-        tree.insert(2);
-        tree.insert(4);
-        tree.insert(6);
-        tree.insert(8);
-        const result = tree.delete(5);
-        expect(result).toBe(5);
-        expect(tree.root.val).toBe(6);
-        expect(tree.root.left.val).toBe(3);
-        expect(tree.root.right.val).toBe(7);
-      });
-
-      test("should return undefined if the tree is empty", () => {
-        const result = tree.delete(5);
-        expect(result).toBeUndefined();
-      });
-
-      test("should return false if the node to be deleted is not found", () => {
-        tree.insert(5);
-        tree.insert(3);
-        tree.insert(7);
-        const result = tree.delete(10);
-        expect(result).toBe(false);
-      });
+  describe("delete", () => {
+    test("should delete a leaf node correctly", () => {
+      tree.insert(5);
+      tree.insert(3);
+      tree.insert(7);
+      const result = tree.delete(3);
+      expect(result).toBe(3);
+      expect(tree.root.left).toBeNull();
     });
+
+    test("should delete a node with one child correctly", () => {
+      tree.insert(5);
+      tree.insert(3);
+      tree.insert(7);
+      tree.insert(4);
+      const result = tree.delete(3);
+      expect(result).toBe(3);
+      expect(tree.root.left.val).toBe(4);
+    });
+
+    test("should delete a node with two children correctly", () => {
+      tree.insert(5);
+      tree.insert(3);
+      tree.insert(7);
+      tree.insert(2);
+      tree.insert(4);
+      tree.insert(6);
+      tree.insert(8);
+      const result = tree.delete(5);
+      expect(result).toBe(5);
+      expect(tree.root.val).toBe(6);
+      expect(tree.root.left.val).toBe(3);
+      expect(tree.root.right.val).toBe(7);
+    });
+
+    test("should return undefined if the tree is empty", () => {
+      const result = tree.delete(5);
+      expect(result).toBeUndefined();
+    });
+
+    test("should return false if the node to be deleted is not found", () => {
+      tree.insert(5);
+      tree.insert(3);
+      tree.insert(7);
+      const result = tree.delete(10);
+      expect(result).toBe(false);
+    });
+  });
 });

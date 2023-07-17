@@ -88,7 +88,7 @@ class BST {
       queue.shift();
     }
     // data.forEach((elem) => {
-    //   // console.log(elem);
+    //   console.log(elem);
     // });
     return data;
   }

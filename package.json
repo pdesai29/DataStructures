@@ -4,7 +4,7 @@
   "description": "",
   "main": "bst.js",
   "scripts": {
-    "test": "jest hashTable"
+    "test": "jest hashTable stack maxBinaryHeap bst doublyLinkedList graph priorityQueue queue singlyLinkedList"
   },
   "type": "module",
   "author": "Pranay",
