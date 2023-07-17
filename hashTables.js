@@ -31,6 +31,8 @@ class HashTable {
           break;
         }
       }
+    } else {
+      return undefined;
     }
 
     return found;
@@ -58,14 +60,14 @@ class HashTable {
     return values;
   }
 }
-
-const ht = new HashTable();
-ht.set("pink", "#23456");
-ht.set("red", "#2345678");
-ht.set("black", "#12345");
-ht.set("green", "#123435467");
-ht.set("maroon", "#234567");
-ht.set("salmon", "#23456");
-ht.set("yellow", "#1234567");
-ht.set("e", "#23456");
-console.log(ht.keys());
+module.exports = HashTable;
+// const ht = new HashTable();
+// ht.set("pink", "#23456");
+// ht.set("red", "#2345678");
+// ht.set("black", "#12345");
+// ht.set("green", "#123435467");
+// ht.set("maroon", "#234567");
+// ht.set("salmon", "#23456");
+// ht.set("yellow", "#1234567");
+// ht.set("e", "#23456");
+// console.log(ht.keys());
