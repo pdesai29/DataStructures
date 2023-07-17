@@ -24,7 +24,7 @@ class SinglyLinkedList {
       this.tail = node;
       this.length++;
     }
-    return node;
+    return this.length;
   }
   printList() {
     let current = this.head;
@@ -45,7 +45,7 @@ class SinglyLinkedList {
       this.head = null;
       this.tail = null;
       this.length--;
-      return current;
+      return current.val;
     }
     while (current.next.next !== null) {
       current = current.next;
@@ -54,7 +54,7 @@ class SinglyLinkedList {
     this.tail = current;
     current.next = null;
     this.length--;
-    return popped;
+    return popped.val;
   }
   shift() {
     const shifted = this.head;
@@ -65,11 +65,11 @@ class SinglyLinkedList {
       this.head = null;
       this.tail = null;
       this.length--;
-      return shifted;
+      return shifted.val;
     }
     this.head = this.head.next;
     this.length--;
-    return shifted;
+    return shifted.val;
   }
   unshift(val) {
     const newNode = new Node(val);
@@ -77,13 +77,12 @@ class SinglyLinkedList {
       this.head = newNode;
       this.tail = newNode;
       this.length++;
-      return newNode;
     } else {
       newNode.next = this.head;
       this.head = newNode;
       this.length++;
-      return newNode;
     }
+    return this.length;
   }
 
   getHead() {
@@ -98,20 +97,19 @@ class SinglyLinkedList {
       current = current.next;
     }
     if (current.next == null) {
-      this.push(val);
+      return this.push(val);
     } else {
       const newNode = new Node(val);
       newNode.next = current.next;
       current.next = newNode;
       this.length++;
-      return newNode;
+      return this.length;
     }
   }
   insertBefore(val, loc) {
     let current = this.head;
     if (loc === current.val) {
-      this.unshift(val);
-      return;
+      return this.unshift(val);
     }
     while (current.next.val !== loc) {
       if (current.next.next === null) {
@@ -120,21 +118,22 @@ class SinglyLinkedList {
       current = current.next;
     }
     if (current.next.next == null) {
-      this.push(val);
+      return this.push(val);
     } else {
       const newNode = new Node(val);
       newNode.next = current.next;
       current.next = newNode;
-      return newNode;
+      this.length++;
+      return this.length;
     }
   }
 
   get(index) {
     if (index > this.length || index < 0) {
-      return "invalid index";
+      return undefined;
     }
     if (index === 0) {
-      return this.head;
+      return this.head.val;
     } else {
       let current = this.head.next;
       let counter = 1;
@@ -142,16 +141,16 @@ class SinglyLinkedList {
         current = current.next;
         counter++;
       }
-      return current;
+      return current.val;
     }
   }
   set(index, newVal) {
     if (index > this.length || index < 0) {
-      return "invalid index";
+      return undefined;
     }
     if (index === 0) {
       this.head.val = newVal;
-      return this.head;
+      return this.head.val;
     } else {
       let current = this.head.next;
       let counter = 1;
@@ -160,7 +159,7 @@ class SinglyLinkedList {
         counter++;
       }
       current.val = newVal;
-      return current;
+      return current.val;
     }
   }
   insert(index, val) {
@@ -168,8 +167,11 @@ class SinglyLinkedList {
     const newNode = new Node(val);
 
     if (index === 0) {
-      this.unshift(val);
-      return true;
+      if (this.unshift(val)) {
+        return true;
+      } else {
+        return false;
+      }
     }
     let current = this.head;
     let counter = 0;
@@ -207,11 +209,15 @@ class SinglyLinkedList {
     return true;
   }
   reverseList() {
+    if (!this.head) {
+      return undefined;
+    }
     let prev = null;
     let current = this.head;
     let next = null;
     let newHead = this.tail;
     let newTail = this.head;
+
     while (current.next !== null) {
       //assigning next
       next = current.next;

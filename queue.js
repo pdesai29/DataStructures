@@ -18,7 +18,7 @@ class Queue {
       this.start = newNode;
       this.end = newNode;
       this.size++;
-      return newNode.val;
+      return this.size;
     }
 
     this.end.next = newNode;
@@ -28,19 +28,21 @@ class Queue {
   }
   dequeue() {
     if (this.size === 0) {
-      return null;
+      return undefined;
     }
     if (this.size === 1) {
       const node = this.start;
       this.start = null;
       this.end = null;
       this.size--;
-      return node;
+      return node.val;
     }
     const dequeue = this.start;
     this.start = dequeue.next;
     dequeue.next = null;
     this.size--;
-    return dequeue;
+    return dequeue.val;
   }
 }
+
+module.exports = Queue;

@@ -1,85 +1,277 @@
-const List = require("../singlyLinkedList");
+const SinglyLinkedList = require("../singlyLinkedList");
 
-describe("Singly Linked List Tests", () => {
-  const list = new List();
-  test("Running push...", () => {
-    list.push(10);
-    expect(list.getHead().val).toEqual(10);
-    expect(list.getTail().val).toEqual(10);
+describe("SinglyLinkedList", () => {
+  let list;
 
-    list.push(20);
-    expect(list.getTail().val).toEqual(20);
-
-    list.push(30);
-    expect(list.getTail().val).toEqual(30);
-
-    list.push(40);
-    expect(list.getTail().val).toEqual(40);
-
-    list.push(50);
-    expect(list.getHead().val).toEqual(10);
-    expect(list.getTail().val).toEqual(50);
-  });
-  test("Running pop...", () => {
-    let popped = list.pop();
-    expect(popped.val).toBe(50);
-    popped = list.pop();
-    expect(popped.val).toBe(40);
-    expect(list.getTail().val).toBe(30);
-    expect(list.getHead().val).toBe(10);
-    list.pop();
-    list.pop();
-    popped = list.pop();
-    expect(popped.val).toBe(10);
-    expect(list.tail).toBe(null);
-    expect(list.head).toBe(null);
-    popped = list.pop();
-    expect(popped).toBe(undefined);
+  beforeEach(() => {
+    list = new SinglyLinkedList();
   });
 
-  test("Running unshift...", () => {
-    let newNode = list.unshift(50);
-    expect(newNode.val).toEqual(50);
-    expect(list.getHead().val).toEqual(50);
-    expect(list.getTail().val).toEqual(50);
+  describe("push", () => {
+    test("should add a new node to the end of the list", () => {
+      list.push(1);
+      list.push(2);
+      list.push(3);
+      expect(list.length).toBe(3);
+      expect(list.head.val).toBe(1);
+      expect(list.tail.val).toBe(3);
+    });
 
-    newNode = list.unshift(40);
-    expect(newNode.val).toEqual(40);
-    expect(list.getHead().val).toEqual(40);
-
-    newNode = list.unshift(30);
-    expect(newNode.val).toEqual(30);
-    expect(list.getHead().val).toEqual(30);
-
-    newNode = list.unshift(20);
-    expect(newNode.val).toEqual(20);
-    expect(list.getHead().val).toEqual(20);
-
-    expect(list.getHead().val).toEqual(20);
-    newNode = list.unshift(10);
-    expect(newNode.val).toEqual(10);
-    expect(list.getHead().val).toEqual(10);
-    expect(list.getTail().val).toEqual(50);
+    test("should return the updated length of the list", () => {
+      const length = list.push(1);
+      expect(length).toBe(1);
+    });
   });
 
-  test("Running shift...", () => {
-    let newNode = list.shift();
-    expect(newNode.val).toEqual(10);
-    expect(list.getHead().val).toEqual(20);
-    newNode = list.shift();
-    expect(newNode.val).toEqual(20);
-    expect(list.getHead().val).toEqual(30);
-    newNode = list.shift();
-    expect(newNode.val).toEqual(30);
-    expect(list.getHead().val).toEqual(40);
-    newNode = list.shift();
-    expect(newNode.val).toEqual(40);
-    newNode = list.shift();
-    expect(newNode.val).toEqual(50);
-    expect(list.head).toEqual(null);
-    expect(list.tail).toEqual(null);
-    expect(list.length).toEqual(0);
-    newNode = list.shift();
-    expect(newNode).toEqual(undefined);
+  describe("printList", () => {
+    test("should print the elements of the list in the correct order", () => {
+      list.push(1);
+      list.push(2);
+      list.push(3);
+      const spy = jest.spyOn(console, "log");
+      list.printList();
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith("1 --> 2 --> 3 --> null");
+      spy.mockRestore();
+    });
+
+    test('should print "null" for an empty list', () => {
+      const spy = jest.spyOn(console, "log");
+      list.printList();
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith("null");
+      spy.mockRestore();
+    });
+  });
+
+  describe("pop", () => {
+    test("should remove and return the last element from the list", () => {
+      list.push(1);
+      list.push(2);
+      list.push(3);
+      const popped = list.pop();
+      expect(popped).toBe(3);
+      expect(list.length).toBe(2);
+      expect(list.tail.val).toBe(2);
+    });
+
+    test("should return undefined if the list is empty", () => {
+      const popped = list.pop();
+      expect(popped).toBeUndefined();
+    });
+
+    test("should update the head and tail pointers correctly when popping the only element", () => {
+      list.push(1);
+      const popped = list.pop();
+      expect(popped).toBe(1);
+      expect(list.length).toBe(0);
+      expect(list.head).toBeNull();
+      expect(list.tail).toBeNull();
+    });
+  });
+
+  describe("insertAfter", () => {
+    test("should insert a new node after the specified location", () => {
+      list.push(1);
+      list.push(2);
+      list.push(4);
+      list.insertAfter(3, 2);
+      expect(list.length).toBe(4);
+      expect(list.head.next.next.val).toBe(3);
+      expect(list.tail.val).toBe(4);
+    });
+
+    test("should return the updated length of the list", () => {
+      list.push(1);
+      list.push(2);
+      const length = list.insertAfter(3, 1);
+      expect(length).toBe(3);
+    });
+
+    test("should append the new node if the specified location is not found", () => {
+      list.push(1);
+      list.push(2);
+      list.insertAfter(3, 5);
+      expect(list.length).toBe(3);
+      expect(list.tail.val).toBe(3);
+    });
+  });
+
+  describe("insertBefore", () => {
+    test("should insert a new node before the specified location", () => {
+      list.push(1);
+      list.push(3);
+      list.push(4);
+      list.insertBefore(2, 3);
+      expect(list.length).toBe(4);
+      expect(list.head.next.val).toBe(2);
+      expect(list.tail.val).toBe(4);
+    });
+
+    test("should return the updated length of the list", () => {
+      list.push(1);
+      list.push(3);
+      const length = list.insertBefore(2, 3);
+      expect(length).toBe(3);
+    });
+
+    test("should prepend the new node if the specified location is the head", () => {
+      list.push(2);
+      list.push(3);
+      list.insertBefore(1, 2);
+      expect(list.length).toBe(3);
+      expect(list.head.val).toBe(1);
+    });
+
+    test("should append the new node if the specified location is not found", () => {
+      list.push(1);
+      list.push(2);
+      list.insertBefore(3, 5);
+      expect(list.length).toBe(3);
+      expect(list.tail.val).toBe(3);
+    });
+  });
+
+  describe("getHead", () => {
+    test("should return the head node of the list", () => {
+      list.push(1);
+      list.push(2);
+      const head = list.getHead();
+      expect(head.val).toBe(1);
+      expect(list.length).toBe(2);
+    });
+  });
+
+  describe("getTail", () => {
+    test("should return the tail node of the list", () => {
+      list.push(1);
+      list.push(2);
+      const tail = list.getTail();
+      expect(tail.val).toBe(2);
+      expect(list.length).toBe(2);
+    });
+  });
+
+  describe("get", () => {
+    test("should return the value at the specified index", () => {
+      list.push(1);
+      list.push(2);
+      list.push(3);
+      expect(list.get(0)).toBe(1);
+      expect(list.get(1)).toBe(2);
+      expect(list.get(2)).toBe(3);
+    });
+
+    test("should return undefined if the index is out of range", () => {
+      list.push(1);
+      list.push(2);
+      expect(list.get(-1)).toBeUndefined();
+      expect(list.get(3)).toBeUndefined();
+    });
+  });
+
+  describe("set", () => {
+    test("should update the value at the specified index", () => {
+      list.push(1);
+      list.push(2);
+      list.push(3);
+      list.set(1, 4);
+      expect(list.get(1)).toBe(4);
+    });
+
+    test("should return undefined if the index is out of range", () => {
+      list.push(1);
+      list.push(2);
+      expect(list.set(-1, 3)).toBeUndefined();
+      expect(list.set(3, 4)).toBeUndefined();
+    });
+  });
+
+  describe("insert", () => {
+    test("should insert a new node at the specified index", () => {
+      list.push(1);
+      list.push(3);
+      list.push(4);
+      list.insert(1, 2);
+      expect(list.length).toBe(4);
+      expect(list.get(1)).toBe(2);
+      expect(list.get(2)).toBe(3);
+    });
+
+    test("should return true if the node is successfully inserted", () => {
+      list.push(1);
+      list.push(2);
+      const result = list.insert(1, 3);
+      expect(result).toBe(true);
+    });
+
+    test("should return false if the index is out of range", () => {
+      list.push(1);
+      list.push(2);
+      const result = list.insert(-1, 3);
+      expect(result).toBe(false);
+    });
+  });
+
+  describe("remove", () => {
+    test("should remove the node at the specified index", () => {
+      list.push(1);
+      list.push(2);
+      list.push(3);
+      list.remove(1);
+      expect(list.length).toBe(2);
+      expect(list.get(1)).toBe(3);
+    });
+
+    test("should return true if the node is successfully removed", () => {
+      list.push(1);
+      const result = list.remove(0);
+      expect(result).toBe(true);
+    });
+
+    test("should return false if the index is out of range", () => {
+      list.push(1);
+      const result = list.remove(2);
+      expect(result).toBe(false);
+    });
+  });
+
+  describe("reverseList", () => {
+    test("should reverse the linked list in place", () => {
+      list.push(1);
+      list.push(2);
+      list.push(3);
+      list.push(4);
+      list.reverseList();
+
+      expect(list.length).toBe(4);
+      expect(list.get(0)).toBe(4);
+      expect(list.get(1)).toBe(3);
+      expect(list.get(2)).toBe(2);
+      expect(list.get(3)).toBe(1);
+    });
+
+    test("should return the reversed linked list", () => {
+      list.push(1);
+      list.push(2);
+      list.push(3);
+      const reversedList = list.reverseList();
+
+      expect(reversedList).toBe(list);
+    });
+
+    test("should handle a single node list", () => {
+      list.push(1);
+      list.reverseList();
+
+      expect(list.length).toBe(1);
+      expect(list.get(0)).toBe(1);
+    });
+
+    test("should handle an empty list", () => {
+      list.reverseList();
+
+      expect(list.length).toBe(0);
+    });
   });
 });

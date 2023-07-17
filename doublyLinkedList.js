@@ -19,14 +19,13 @@ class doublyLinkedList {
       this.head = newNode;
       this.tail = newNode;
       this.length++;
-      return this;
     } else {
       this.tail.next = newNode;
       newNode.prev = this.tail;
       this.tail = newNode;
       this.length++;
-      return this;
     }
+    return this.length;
   }
 
   pop() {
@@ -39,13 +38,13 @@ class doublyLinkedList {
         this.head = null;
         popped.prev = null;
         this.length--;
-        return popped;
+        return popped.val;
       }
       this.tail = this.tail.prev;
       this.tail.next = null;
       popped.prev = null;
       this.length--;
-      return popped;
+      return popped.val;
     }
   }
 
@@ -56,13 +55,13 @@ class doublyLinkedList {
       this.head = null;
       this.tail = null;
       this.length--;
-      return shifted;
+      return shifted.val;
     }
     this.head = shifted.next;
     this.head.prev = null;
     this.length--;
     shifted.next = null;
-    return shifted;
+    return shifted.val;
   }
 
   unshift(val) {
@@ -74,7 +73,7 @@ class doublyLinkedList {
       this.head.prev = newNode;
       this.head = newNode;
       this.length++;
-      return this;
+      return this.length;
     }
   }
   get(index) {
@@ -105,10 +104,10 @@ class doublyLinkedList {
   }
   insert(index, val) {
     if (index < 0 || index > this.length) return false;
-    if (index == 0) {
+    if (index === 0) {
       this.unshift(val);
       return true;
-    } else if (index == this.length) {
+    } else if (index === this.length) {
       this.push(val);
       return true;
     } else {
@@ -154,6 +153,9 @@ class doublyLinkedList {
     return true;
   }
   printReverseList() {
+    if (!this.head) {
+      return false;
+    }
     let current = this.tail;
     let s = "";
     while (current !== null) {
@@ -183,18 +185,18 @@ class doublyLinkedList {
     return this;
   }
 }
+module.exports = doublyLinkedList;
+// const list = new doublyLinkedList();
 
-const list = new doublyLinkedList();
-
-console.log(list.push(10));
-console.log(list.push(20));
-console.log(list.push(30));
-console.log(list.push(40));
-console.log(list.push(50));
-console.log(list.push(60));
-console.log(list.push(70));
-console.log(list.push(80));
-console.log(list.push(90));
+// console.log(list.push(10));
+// console.log(list.push(20));
+// console.log(list.push(30));
+// console.log(list.push(40));
+// console.log(list.push(50));
+// console.log(list.push(60));
+// console.log(list.push(70));
+// console.log(list.push(80));
+// console.log(list.push(90));
 // console.log(list.pop());
 // console.log(list.shift());
 

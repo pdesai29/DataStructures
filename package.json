@@ -1,13 +1,13 @@
 {
-  "name": "sec-18-data-structure",
+  "name": "data_structures",
   "version": "1.0.0",
   "description": "",
   "main": "bst.js",
   "scripts": {
-    "test": "jest stack"
+    "test": "jest doublyLinkedList"
   },
   "type": "module",
-  "author": "",
+  "author": "Pranay",
   "license": "ISC",
   "dependencies": {
     "jest": "^29.6.1"
