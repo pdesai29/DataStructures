@@ -18,7 +18,9 @@ class Graph {
       this.adjacencyList[v2].push(v1);
       return this;
     } else {
-      return v1 ? "vertex 2 does not Exists" : "vertex 1 does not Exists";
+      return this.adjacencyList[v1]
+        ? "vertex 2 does not Exists"
+        : "vertex 1 does not Exists";
     }
   }
   removeEdge(v1, v2) {
@@ -147,7 +149,9 @@ class Graph {
     return result;
   }
 }
-const g = new Graph();
+
+module.exports = Graph;
+// const g = new Graph();
 // console.log(g.addVertex("Tokyo"));
 // console.log(g.addVertex("Tokyo"));
 // console.log(g.addVertex("India"));
@@ -162,20 +166,20 @@ const g = new Graph();
 // // console.log(g.removeEdge("Tokyo", "India"));
 // console.log(g.removeVertex("Tokyo"));
 
-console.log(g.addVertex("A"));
-console.log(g.addVertex("B"));
-console.log(g.addVertex("C"));
-console.log(g.addVertex("D"));
-console.log(g.addVertex("E"));
-console.log(g.addVertex("F"));
-console.log(g.addEdge("A", "B"));
-console.log(g.addEdge("A", "C"));
-console.log(g.addEdge("D", "B"));
-console.log(g.addEdge("D", "F"));
-console.log(g.addEdge("E", "F"));
-console.log(g.addEdge("D", "E"));
-console.log(g.addEdge("C", "E"));
-console.log(g.DFSRecursive("A"));
-console.log(g.DFSIterative("A"));
-console.log(g.BFSRecursive("A"));
-console.log(g.BFSIterative("A"));
+// console.log(g.addVertex("A"));
+// console.log(g.addVertex("B"));
+// console.log(g.addVertex("C"));
+// console.log(g.addVertex("D"));
+// console.log(g.addVertex("E"));
+// console.log(g.addVertex("F"));
+// console.log(g.addEdge("A", "B"));
+// console.log(g.addEdge("A", "C"));
+// console.log(g.addEdge("D", "B"));
+// console.log(g.addEdge("D", "F"));
+// console.log(g.addEdge("E", "F"));
+// console.log(g.addEdge("D", "E"));
+// console.log(g.addEdge("C", "E"));
+// console.log(g.DFSRecursive("A"));
+// console.log(g.DFSIterative("A"));
+// console.log(g.BFSRecursive("A"));
+// console.log(g.BFSIterative("A"));
