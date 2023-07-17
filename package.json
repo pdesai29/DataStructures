@@ -4,7 +4,7 @@
   "description": "",
   "main": "bst.js",
   "scripts": {
-    "test": "jest bst"
+    "test": "jest maxBinaryHeap"
   },
   "type": "module",
   "author": "Pranay",

@@ -67,7 +67,6 @@ class MaxBinaryHeap {
   //     return removed;
   //   }
 
-  //remove Colt
   remove() {
     if (!this.list.length) {
       return undefined;
@@ -121,42 +120,42 @@ class MaxBinaryHeap {
     }
   }
 }
+module.exports = MaxBinaryHeap;
+// const maxHeap = new MaxBinaryHeap();
 
-const maxHeap = new MaxBinaryHeap();
-
-// console.log(maxHeap.insert(41));
 // console.log(maxHeap.insert(39));
 // console.log(maxHeap.insert(33));
 // console.log(maxHeap.insert(18));
 // console.log(maxHeap.insert(27));
 // console.log(maxHeap.insert(12));
+// console.log(maxHeap.insert(41));
 
-console.log(maxHeap.insert(10));
-console.log(maxHeap.insert(20));
-console.log(maxHeap.insert(30));
-console.log(maxHeap.insert(40));
-console.log(maxHeap.insert(50));
-console.log(maxHeap.insert(1));
-console.log(maxHeap.insert(6));
-console.log(maxHeap.insert(9));
-console.log(maxHeap.insert(1));
-console.log(maxHeap.remove());
-console.log(maxHeap.list);
-console.log(maxHeap.remove());
-console.log(maxHeap.list);
-console.log(maxHeap.remove());
-console.log(maxHeap.list);
-console.log(maxHeap.remove());
-console.log(maxHeap.list);
-console.log(maxHeap.remove());
-console.log(maxHeap.list);
-console.log(maxHeap.remove());
-console.log(maxHeap.list);
-console.log(maxHeap.remove());
-console.log(maxHeap.list);
-console.log(maxHeap.remove());
-console.log(maxHeap.list);
-console.log(maxHeap.remove());
-console.log(maxHeap.list);
-console.log(maxHeap.remove());
-console.log(maxHeap.list);
+// console.log(maxHeap.insert(10));
+// console.log(maxHeap.insert(20));
+// console.log(maxHeap.insert(30));
+// console.log(maxHeap.insert(40));
+// console.log(maxHeap.insert(50));
+// console.log(maxHeap.insert(1));
+// console.log(maxHeap.insert(6));
+// console.log(maxHeap.insert(9));
+// console.log(maxHeap.insert(1));
+// console.log(maxHeap.remove());
+// console.log(maxHeap.list);
+// console.log(maxHeap.remove());
+// console.log(maxHeap.list);
+// console.log(maxHeap.remove());
+// console.log(maxHeap.list);
+// console.log(maxHeap.remove());
+// console.log(maxHeap.list);
+// console.log(maxHeap.remove());
+// console.log(maxHeap.list);
+// console.log(maxHeap.remove());
+// console.log(maxHeap.list);
+// console.log(maxHeap.remove());
+// console.log(maxHeap.list);
+// console.log(maxHeap.remove());
+// console.log(maxHeap.list);
+// console.log(maxHeap.remove());
+// console.log(maxHeap.list);
+// console.log(maxHeap.remove());
+// console.log(maxHeap.list);
